@@ -16,7 +16,8 @@
   },
   "dependencies": {
     "commander": "2.6.0",
-    "node-horseman": "2.7.0",
+    "node-horseman": "^2.7.0",
+    "phantomjs-prebuilt": "^2.1.13",
     "prompt": "0.2.14",
     "valid-url": "1.0.9"
   },

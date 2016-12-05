@@ -18,7 +18,7 @@ program
 /**
  * Path to the PhantomJS binary
  */
-var PATH_TO_PHANTOM = '/usr/local/bin/phantomjs';
+var PATH_TO_PHANTOM = __dirname + '/node_modules/phantomjs-prebuilt/lib/phantom/bin/phantomjs';
 
 /**
  * Stores an array of actions support by this utility framework.
