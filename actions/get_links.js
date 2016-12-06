@@ -27,8 +27,8 @@ module.exports = function (phantomInstance, url) {
     // Interact with the page. This code is run in the browser.
     .evaluate(function () {
       $ = window.$ || window.jQuery;
-      
-      // Return a single result object with properties for 
+
+      // Return a single result object with properties for
       // whatever intelligence you want to derive from the page
       var result = {
         links: []

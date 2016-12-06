@@ -131,6 +131,16 @@ var main = function () {
     });
     break;
 
+    case 'batch_emails':
+    prompt.get([{
+        name: 'file',
+        description: 'Enter file to get emails for',
+        required: true
+    }], function (err, result) {
+      performAction(phantomInstance, result.file);
+    });
+    break;
+
     case 'hello_world':
       prompt.get([{
         name: 'url',
