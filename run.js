@@ -118,6 +118,19 @@ var main = function () {
       });
       break;
 
+    case 'get_html':
+    prompt.get([{
+        name: 'url',
+        description: 'Enter URL to get HTML from',
+        required: true,
+        conform: function (value) {
+          return validUrl.isWebUri(value);
+        }
+    }], function (err, result) {
+      performAction(phantomInstance, result.url);
+    });
+    break;
+
     case 'hello_world':
       prompt.get([{
         name: 'url',

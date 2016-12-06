@@ -15,10 +15,13 @@
     "url": "https://github.com/sdulaney/swiss-army/"
   },
   "dependencies": {
+    "cached-request": "^1.1.0",
+    "cheerio": "^0.22.0",
     "commander": "2.6.0",
     "node-horseman": "^2.7.0",
     "phantomjs-prebuilt": "^2.1.13",
     "prompt": "0.2.14",
+    "request": "^2.79.0",
     "valid-url": "1.0.9"
   },
   "license": "MIT"
