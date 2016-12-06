@@ -118,10 +118,10 @@ var main = function () {
       });
       break;
 
-    case 'get_html':
+    case 'thatsthem_emails':
     prompt.get([{
         name: 'url',
-        description: 'Enter URL to get HTML from',
+        description: 'Enter URL to get emails from',
         required: true,
         conform: function (value) {
           return validUrl.isWebUri(value);
