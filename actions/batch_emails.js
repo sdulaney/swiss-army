@@ -34,13 +34,19 @@ module.exports = function (phantomInstance, file) {
     //   }
     // });
 
-    var range = {s:{c:0, r:0}, e:{c:0, r:46}};
+    var range = {s:{c:0, r:1}, e:{c:0, r:46}};
     for(var R = range.s.r; R <= range.e.r; ++R) {
       for(var C = range.s.c; C <= range.e.c; ++C) {
         var cell_address = XLSX.utils.encode_cell({c:C, r:R});
         var desired_cell = worksheet[cell_address];
+        // Log current address in spreadsheet
+        // fs.appendFile('./' + 'emails.txt', desired_cell.v + '\n', {'flag':'a'}, function (err) {
+        //     if (err) return console.log(err);
+        //     console.log('Hello World > helloworld.txt');
+        // });
         if(desired_cell.v != 'BLANK'){
             var desired_address = desired_cell.v;
+
             //console.log(desired_address);
             var column_two_cell_address = XLSX.utils.encode_cell({c:C+1, r:R});
             var desired_cell_two = worksheet[column_two_cell_address];
@@ -61,18 +67,28 @@ module.exports = function (phantomInstance, file) {
                     var fetched_html = $.html();
                     // Parse scrambled emails
                     var emails = fetched_html.replace(/\s+/g, " ").split('var p1 = ');
-                    if(emails.length > 0){
+                    if(emails.length > 1){
                         for(var i=1; i < emails.length; i++){
                             if(emails[i].includes('var p2 = ') && emails[i].includes('var p3 = ') ) {
                                 var email = emails[i].split(';')[0] + emails[i].split('var p2 = ')[1].split(';')[0] + emails[i].split('var p3 = ')[1].split(';')[0];
+                                //fetched_emails.push(email.replace(/\"/g,'').replace(/' '/g, ''));
                                 fetched_emails.push(email.replace(/\"/g,'').replace(/' '/g, ''));
 
                                 //console.log(email.replace(/\"/g,'').replace(/' '/g, ''));
                             }
                         }
+                        var found_emails = fetched_emails.join(';') + '\n';
+
+                        email_column.push(fetched_emails.join(';'));
                     }
                     //console.log(fetched_emails.join(';'));
-                    email_column.push(fetched_emails.join(';'));
+                    else {
+                        fs.appendFile('./' + 'emails.txt', 'No emails found\n', {'flag':'a'}, function (err) {
+                            if (err) return console.log(err);
+                            console.log('Hello World > helloworld.txt');
+                        });
+                    }
+
                 }
                 else {
                   //console.log("We’ve encountered an error: " + error);
@@ -81,16 +97,20 @@ module.exports = function (phantomInstance, file) {
         }
         else {
             // Add placeholder row to align with spreadsheet
-            email_column.push('BLANK');
+            //email_column.push('BLANK');
+            fs.appendFile('./' + 'emails.txt', 'BLANK\n', {'flag':'a'}, function (err) {
+                if (err) return console.log(err);
+                console.log('Hello World > helloworld.txt');
+            });
         }
       }
       //console.log(email_column);
     }
 
-    for(var i = 0; i < email_column.length;i++){
-        console.log(email_column[i]);
-
-    }
+    // for(var i = 0; i < email_column.length;i++){
+    //     console.log(email_column[i]);
+    //
+    // }
 
 
 
